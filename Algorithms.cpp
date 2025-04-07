@@ -25,7 +25,10 @@ namespace Graph{
 graph Algorithms::dfs_visit(graph& g, graph& dfs_tree, int v, int color[]) {
     // Mark the vertex v as visiting (color 1)
     color[v] = 1;
-
+     // Check if the source vertex is within the valid range
+     if (v < 0 || v >= g.getNumVertices()) {
+        throw std::out_of_range("Vertex index out of range");
+    }
     // Get the list of neighbors for the current vertex v
     NodeG* neighbor = g.getAdjList(v);
 
@@ -64,6 +67,7 @@ graph Algorithms::dfs_visit(graph& g, graph& dfs_tree, int v, int color[]) {
 // Returns:
 //   - A graph representing the DFS tree.
 graph Algorithms::dfs(graph& g, int src) {
+   
     // Get the number of vertices in the graph
     int numVertices = g.getNumVertices();
 
@@ -430,7 +434,19 @@ graph Algorithms::prim(graph& g) {
     int* key = new int[v];       // Stores the minimum weight edge that connects the vertex to the MST.
     int* parent = new int[v];    // Stores the parent vertex of each vertex in the MST.
     bool* inMST = new bool[v];   // Stores whether a vertex is included in the MST or not.
+    if (g.getAdjList(0) == nullptr) {
+        return graph(1); // If there is no adjacency list for vertex 0, return an empty graph
+    }
+    // Create an Algorithms object to use other algorithms like BFS
+    Algorithms alg;
 
+    bool connected = true;
+
+    // Perform a BFS from vertex 0 to check if the graph is connected
+    alg.bfs(g, 0, &connected);
+    if (!connected) {
+        throw std::invalid_argument("Kruskal's algorithm cannot run on disconnected graphs");
+    }
     // Initialize all vertices with default values.
     for (int i = 0; i < v; ++i) {
         key[i] = INT_MAX;   // Set the key to infinity for all vertices.

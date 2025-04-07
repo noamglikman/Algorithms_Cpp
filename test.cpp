@@ -13,14 +13,12 @@ TEST_CASE("Prim's Algorithm - Edge Cases and General Cases") {
         graph mst = algo.prim(g);
         CHECK(mst.getNumVertices() == 0);
     }
-    
     SUBCASE("Single Vertex Graph") {
         Algorithms algo;
         graph g(1);
         graph mst = algo.prim(g);
         CHECK(mst.getNumVertices() == 1);
     }
-    
     SUBCASE("Small Graph - 3 Vertices") {
         Algorithms algo;
         graph g(3);
@@ -44,7 +42,14 @@ TEST_CASE("Prim's Algorithm - Edge Cases and General Cases") {
         CHECK(mst.getNumVertices() == 4);
         CHECK(mst.getTotalWeight() == -12);
     }
+    SUBCASE("Graph that is not connected") {
+        Algorithms algo;
+        graph g(4);
+        g.addEdge(0, 1, 10);
+        g.addEdge(2, 3, 20);
+        CHECK_THROWS_AS(algo.prim(g), std::invalid_argument);
     }
+}
     
 TEST_CASE("BFS Algorithm") {
         std::cout << "Starting BFS from vertex " << std::endl;
@@ -77,7 +82,7 @@ TEST_CASE("BFS Algorithm") {
             bool connected;
             NodeG* startNode = g.getAdjList(0);  
             Graph::graph bfsTree = algo.bfs(g, 0,&connected);
-            //CHECK(connected == false);
+            CHECK(connected == false);
         }
         SUBCASE("BFS not connected") {
             Algorithms algo;
@@ -109,6 +114,11 @@ TEST_CASE("DFS Algorithm") {
         graph g(0);
         graph mst = algo.dfs(g,0);
         CHECK(mst.getNumVertices() == 0);
+    }
+    SUBCASE("DFS whit not exist vertex") {
+        Algorithms algo;
+        graph g(4);
+        CHECK_THROWS_AS(algo.dfs(g, 5), std::out_of_range);
     }
  }
 TEST_CASE("Kruskal Algorithm") {

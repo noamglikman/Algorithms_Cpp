@@ -91,7 +91,11 @@ int main() {
      Graph::Algorithms algo;
      Graph::graph dfsTree = algo.dfs(g, 0);
      dfsTree.print_graph();
-
+     std::cout<<"\nTesting DFS if its not connected graph...\n";
+        Graph::graph g1(4);
+        g1.addEdge(0, 1, 1);
+        g1.addEdge(2, 3, 1);
+        g1.print_graph();
 
 
     std::cout << "\nTesting Dijkstra...\n";

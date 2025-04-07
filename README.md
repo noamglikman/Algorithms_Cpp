@@ -2,15 +2,22 @@
 # Assigment 1- System Programming 2 -Algorithm implementation with CPP
 
 * **Run Example:**
+```
 make clean
 make
 ./main
-
+```
 * **Test run:**
+```
 make run_tests
-
+```
 * **Project stracture:**
-with run "tree" in terminal:
+with run "tree" in terminal
+
+## classes:
+Algorithms,graph,main,UnionFindSet,Queue.
+## namespace:
+Graph
 ```bash
 .
 ├── Algorithms.cpp
@@ -34,6 +41,7 @@ with run "tree" in terminal:
 ├── test
 ├── test.cpp
 └── test.o
+```
 
 ### General Explantation of the code ##
 I implemented the algorithms alongside the implementation of the priority queue and union-find.
@@ -46,6 +54,11 @@ It is a node in the graph, each having a unique node number. For example, if the
 So far, we have a graph node called NodeG, an object in the queue called Node, and an object in the union-find called NodeUnion.
 
 In addition, the graph class has two functions for adding edges—one for directed edges and one for undirected edges, as needed. In the algorithms, I added an undirected edge, but if needed, I can simply change the function call to the directed one, called addEdge.
+
+i have more tests in the main so put attention for that.
+i added a lot of notes that will appear with the code so you will understand what you see.
+
+
 
 ## Explanation of Algorithms:##
 
@@ -158,6 +171,7 @@ Completion:
 - Single Vertex Graph  
 - Small Graph – 3 Vertices  
 - Graph with Negative Weights  
+- not connedted
 
 ## BFS Algorithm
 - Basic BFS on a connected graph  
@@ -172,6 +186,8 @@ Completion:
 ## DFS Algorithm
 - DFS on a simple linear graph  
 - Empty Graph
+- not connected(in main)
+- not exist vertex
 
 ## Kruskal's Algorithm
 - General Case (5 vertices)  
